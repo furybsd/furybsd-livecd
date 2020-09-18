@@ -22,7 +22,7 @@ iso="${livecd}/iso"
     # On Cirrus CI ${livecd} is in tmpfs for speed reasons
     # and tends to run out of space. Writing the final ISO
     # to non-tmpfs should be an acceptable compromise
-    iso="${CIRRUS_WORKING_DIR}"
+    iso="${CIRRUS_WORKING_DIR}/artifacts"
   fi
 uzip="${livecd}/uzip"
 cdroot="${livecd}/cdroot"
