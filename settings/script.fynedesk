@@ -19,9 +19,11 @@ pkg install -y git go pkgconf glfw
 
 cd /tmp
 
-export DESTDIR=${unzip}
+export DESTDIR=${uzip}
 export PREFIX=/usr/local
 mkdir -p ${DESTDIR}${PREFIX}/bin
+mkdir -p ${DESTDIR}${PREFIX}/share/xsessions
+mkdir -p ${DESTDIR}${PREFIX}/share/pixmaps
 
 # FyneDesk
 go get fyne.io/fynedesk
@@ -31,7 +33,7 @@ git checkout 'feature/bsd'
 make && make install
 cd -
 
-# Fyne utility
+# Fyne utility
 go get -d fyne.io/fyne/cmd/fyne
 cd ~/go/src/fyne.io/fyne/cmd/fyne
 git checkout b093037 # TODO after release we can just use "go get ..."
