@@ -40,13 +40,24 @@ git checkout b093037 # TODO after release we can just use "go get ..."
 go install
 cd -
 
-# Fyne calculator
-go get -d github.com/fyne-io/examples
-cd ~/go/src/github.com/fyne-io/examples/cmd/calculator
-~/go/bin/fyne package -icon ../../img/icon/calculator.png
-tar xf calculator.tar.gz
-make install
-cd -
+function fyne_get {
+  go get -d $2
+  cd ~/go/src/$2/$3
+  ~/go/bin/fyne package -icon $4
+  tar xf $1.tar.gz
+  make install
+  cd -
+}
+
+function fyne_get_example {
+  fyne_get $1 github.com/fyne-io/examples cmd/$1 ../../img/icon/$1.png
+}
+
+fyne_get_example calculator
+fyne_get_example clock
+fyne_get_example life
+
+fyne_get beebui github.com/andydotxyz/beebui cmd/beebui ../../icon.png
 
 # Wallpaper
 mkdir -p "${uzip}/usr/local/share/slim/themes/default/"
