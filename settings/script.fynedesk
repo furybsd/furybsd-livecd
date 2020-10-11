@@ -19,20 +19,15 @@ pkg install -y git go pkgconf glfw
 
 cd /tmp
 
+export DESTDIR=${unzip}
+export PREFIX=/usr/local
+
 # FyneDesk
 go get fyne.io/fynedesk
 cd ~/go/src/fyne.io/fynedesk/
 git checkout 'feature/bsd'
 
-go build ./cmd/fynedesk_runner || (echo "Failed to build fynedesk_runner"; exit 1)
-go build ./cmd/fynedesk || (echo "Failed to build fynedesk"; exit 1)
-
-mkdir -p "${uzip}/usr/local/bin/"
-install -Dm00755 fynedesk_runner "${uzip}/usr/local/bin/fynedesk_runner"
-install -Dm00755 fynedesk "${uzip}/usr/local/bin/fynedesk"
-# We are not using xsessions for now
-# mkdir -p "${uzip}/usr/local/share/xsessions/"
-# install -Dm00644 fynedesk.desktop "${uzip}/usr/local/share/xsessions/fynedesk.desktop"
+make && make install
 
 cd -
 
