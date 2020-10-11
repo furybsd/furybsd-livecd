@@ -21,6 +21,7 @@ cd /tmp
 
 export DESTDIR=${unzip}
 export PREFIX=/usr/local
+mkdir -p ${DESTDIR}${PREFIX}/bin
 
 # FyneDesk
 go get fyne.io/fynedesk
@@ -28,15 +29,21 @@ cd ~/go/src/fyne.io/fynedesk/
 git checkout 'feature/bsd'
 
 make && make install
-
 cd -
 
-# Fyne examples
-go get github.com/fyne-io/examples
-cd ~/go/src/github.com/fyne-io/examples/
-go build -v
-cp examples "${uzip}/usr/local/bin"
+# Fyne utility
+go get -d fyne.io/fyne/cmd/fyne
+cd ~/go/src/fyne.io/fynd/cmd/fyne
+git checkout 4ef15dd # TODO after release we can just use "go get ..."
+go install
+cd -
 
+# Fyne calculator
+go get -d github.com/fyne-io/examples
+cd ~/go/src/github.com/fyne-io/examples/cmd/calculator
+fyne package -icon ../../img/icons/calculator.png
+tar xf calculator.tar.gz
+make install
 cd -
 
 # Wallpaper
