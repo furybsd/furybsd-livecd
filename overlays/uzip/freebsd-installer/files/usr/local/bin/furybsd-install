@@ -182,6 +182,9 @@ fi
 if [ -f "/usr/local/bin/sddm" ] ; then
   chroot "${FSMNT}" sysrc sddm_enable="YES"
 fi
+if [ -f "/usr/local/bin/slim" ] ; then
+  chroot "${FSMNT}" sysrc slim_enable="YES"
+fi
 
 # Set the timezone on the system if it has been provided
 # by the graphical installer frontend
